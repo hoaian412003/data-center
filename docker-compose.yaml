@@ -7,7 +7,7 @@ services:
     ports:
       - 9870:9870
     env_file:
-      - ./config
+      - ./config/namenode.env
     environment:
       ENSURE_NAMENODE_DIR: "/tmp/hadoop-root/dfs/name"
     volumes:
@@ -17,7 +17,7 @@ services:
     image: apache/hadoop:3
     command: [ "hdfs", "datanode" ]
     env_file:
-      - ./config
+      - ./config/datanode.env
 
   resourcemanager:
     image: apache/hadoop:3
@@ -26,14 +26,15 @@ services:
     ports:
       - 8088:8088
     env_file:
-      - ./config
+      - ./config/namenode.env
     volumes:
       - ./test.sh:/opt/test.sh
+      
   nodemanager:
     image: apache/hadoop:3
     command: [ "yarn", "nodemanager" ]
     env_file:
-      - ./config
+      - ./config/namenode.env
 
   etl:
     image: apache/nifi:latest

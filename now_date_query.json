@@ -1,7 +1,5 @@
 {
-  "query": {
-    "createdAt": {
-      "$gte": "new Date(${now():format('yyyy-MM-dd')})"
-    }
+  "createdAt": {
+    "$gte": "${now():format('yyyy:MM:dd')}T00:00:00.000Z"
   }
 }

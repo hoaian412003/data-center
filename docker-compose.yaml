@@ -36,17 +36,17 @@ services:
     env_file:
       - ./config/namenode.env
 
-  etl:
-    image: apache/nifi:latest
-    # entrypoint: /bin/bash
-    user: "root:root"
-    env_file:
-      - nifi.env
-    ports:
-      - 8080:8080
-      - 8443:8443
-    volumes:
-      - hadoop-resource:/resources:rw
+  # etl:
+  #   image: apache/nifi:latest
+  #   # entrypoint: /bin/bash
+  #   user: "root:root"
+  #   env_file:
+  #     - nifi.env
+  #   ports:
+  #     - 8080:8080
+  #     - 8443:8443
+  #   volumes:
+  #     - hadoop-resource:/resources:rw
 
 volumes:
   hadoop-resource:

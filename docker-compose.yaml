@@ -6,18 +6,23 @@ services:
     command: [ "hdfs", "namenode" ]
     ports:
       - 9870:9870
+      - 50070:50070
     env_file:
       - ./config/namenode.env
     environment:
       ENSURE_NAMENODE_DIR: "/tmp/hadoop-root/dfs/name"
     volumes:
       - hadoop-resource:/opt/hadoop/etc/hadoop
+    networks:
+      - hadoop_network
 
   datanode:
     image: apache/hadoop:3
     command: [ "hdfs", "datanode" ]
     env_file:
       - ./config/datanode.env
+    networks:
+      - hadoop_network
 
   resourcemanager:
     image: apache/hadoop:3
@@ -29,24 +34,21 @@ services:
       - ./config/namenode.env
     volumes:
       - ./test.sh:/opt/test.sh
-      
+    networks:
+      - hadoop_network
+
   nodemanager:
     image: apache/hadoop:3
     command: [ "yarn", "nodemanager" ]
     env_file:
       - ./config/namenode.env
-
-  # etl:
-  #   image: apache/nifi:latest
-  #   # entrypoint: /bin/bash
-  #   user: "root:root"
-  #   env_file:
-  #     - nifi.env
-  #   ports:
-  #     - 8080:8080
-  #     - 8443:8443
-  #   volumes:
-  #     - hadoop-resource:/resources:rw
+    networks:
+      - hadoop_network
 
 volumes:
   hadoop-resource:
+
+
+networks:
+  hadoop_network:
+    name: hadoop_network

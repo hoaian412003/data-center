@@ -13,9 +13,6 @@ services:
       ENSURE_NAMENODE_DIR: "/tmp/hadoop-root/dfs/name"
     volumes:
       - hadoop-resource:/opt/hadoop/etc/hadoop
-      - ../dataset:/dataset
-      - ./custom-bash.rc:/opt/hadoop/.bashrc
-      - /Users/tranhoaian/Desktop/dev/big-data/solves/myid/target/myid-1.0-SNAPSHOT.jar:/job/test.jar
     networks:
       - hadoop_network
 

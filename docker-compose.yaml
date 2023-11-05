@@ -13,6 +13,7 @@ services:
       ENSURE_NAMENODE_DIR: "/tmp/hadoop-root/dfs/name"
     volumes:
       - hadoop-resource:/opt/hadoop/etc/hadoop
+      - ./share:/share
     networks:
       - hadoop_network
 
